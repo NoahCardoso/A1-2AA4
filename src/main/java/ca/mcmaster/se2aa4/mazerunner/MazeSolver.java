@@ -41,7 +41,14 @@ public class MazeSolver {
         return false;
 
 	}
-   
 
+	public void printCanonicalPath(){
+		System.out.print("Canonical Path: ");
+		//prints each step taken through the maze
+		for(int i = 0; i < path.size(); i++){
+			System.out.print(path.get(i));
+		}
+		System.out.println(" ");
+	}
 
 }
