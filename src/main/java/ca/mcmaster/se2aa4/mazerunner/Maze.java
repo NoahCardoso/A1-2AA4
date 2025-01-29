@@ -5,31 +5,33 @@ import java.util.ArrayList;
 public class Maze {
 
 	private int[][] maze;
-	private int rows;
-	private int columns;
+	private int X;
+	private int Y;
 
 	//Takes a list of a maze and transforms it into a 2D array
 	public Maze(ArrayList<Integer> mazeList, int totalLines){
-		this.rows = totalLines;
+		this.Y = totalLines;
 		//calcuates number of columns needed
-		this.columns = mazeList.size() / totalLines;
-		this.maze = new int[rows][columns];
+		this.X = mazeList.size() / totalLines;
+		this.maze = new int[X][Y];
 
 		//initalizes the 2D array
-		for(int i = 0; i < rows; i++){
-			for(int j = 0; j < columns; j++){
-				maze[i][j] = mazeList.get(columns * i + j);
+		for(int i = 0; i < Y; i++){
+			for(int j = 0; j < X; j++){
 
+				maze[j][i] = mazeList.get(Y * i + j);
+				
 			}
+			
 		}
+		
 	}
 
 	//Sets the value of a position in the 2D array to value
 	public void set(int x, int y, int value){
-		if(x < rows && y < columns && x >= 0 && y >= 0){
+		if(x < X && y < Y && x >= 0 && y >= 0){
 			maze[x][y] = value;
-		}
-		else{
+		}else{
 			throw new IllegalArgumentException("Invalid position");
 		}
 		
@@ -37,21 +39,20 @@ public class Maze {
 
 	//Returns the value at a position in the maze
 	public int get(int x, int y){
-		if(x < rows && y < columns && x >= 0 && y >= 0){
+		if(x < X && y < Y && x >= 0 && y >= 0){
 			return (maze[x][y]);
 		}else{
 			throw new IllegalArgumentException("Invalid position");
 		}
-
 		
 	}
 
-	public int getColumns(){
-		return columns;
+	public int getY(){
+		return Y;
 	}
 
-	public int getRows(){
-		return rows;
+	public int getX(){
+		return X;
 	}
    
 }

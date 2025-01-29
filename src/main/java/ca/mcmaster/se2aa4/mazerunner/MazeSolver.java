@@ -1,6 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MazeSolver {
 	private Maze maze;
@@ -14,27 +15,68 @@ public class MazeSolver {
 	//Only solves the straight maze
 	//Otherwise cannot solve the maze
 	public boolean Solve(){
-		int rows = maze.getRows();
-		int columns = maze.getColumns();
+		int y = maze.getY();
+		int x = maze.getX();
+	
 
-        for(int i = 0; i < rows; i++){
+        for(int j = 0; j < y; j++){
 			//looks for entrance on left side
-			if(maze.get(i, 0) == 0){
-				//keeps moving towards the right untill it hits a wall
-				// or till it reachs the exit
-                for(int j = 0; j < columns; j++){
-					//check if it can move toward the right
-                    if(maze.get(i, j) == 0){
-                        path.add("R");
-                        continue;
-                    }
-					//if it is blocked then no straight path exists
-                    else{
-                        return false;
-                    }
-                }
-				//has reached the end of the maze without hitting a wall
-                return true;
+			
+			if(maze.get(0, j) == 0){
+				path.add("F");
+				int px = 0;
+				int py = j;
+				int cx = 1;
+				int cy = j;
+				
+				
+				maze.set(cx,cy,2);
+				while(cx < x-1){
+					int dx = cx - px;
+					int dy = cy - py;
+					int rx = -1*dy;
+					int ry = dx;
+					
+					if(maze.get(rx+cx,ry+cy) == 0){
+						px = cx;
+						py = cy;
+						cx += rx;
+						cy += ry;
+						
+						path.add("R");
+						path.add("F");
+						
+					}
+					else if(maze.get(dx+cx,dy+cy) == 0){
+						px = cx;
+						py = cy;
+						cx += dx;
+						cy += dy;
+						path.add("F");
+					}
+					else if(maze.get(-1*rx+cx,-1*ry+cy) == 0){
+						px = cx;
+						py = cy;
+						cx += -1*rx;
+						cy += -1*ry;
+						path.add("L");
+						path.add("F");
+						
+					}
+					else{
+						px = cx;
+						py = cy;
+						cx -= dx;
+						cy -= dy;
+						path.add("R");
+						path.add("R");
+						path.add("F");
+					}
+
+					
+				}
+				maze.set(cx,cy,2);
+				return true;
             }
 		}
 		//no entrance found
