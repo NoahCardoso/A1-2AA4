@@ -92,5 +92,34 @@ public class MazeSolver {
 		}
 		System.out.println(" ");
 	}
+	public void printFactorizedPath(){
+		System.out.print("Factorized Path: ");
+		//prints each step taken through the maze
+		for(int i = 0; i < path.size(); i++){
+			int c = 1;
+			if(i+1<path.size()){
+				while(path.get(i) == path.get(i+1)){
+					c++;
+					if(i+2<path.size()){
+						i++;
+					}
+					else{
+						break;
+					}
+				}
+				if(c>1){
+					System.out.print(c+path.get(i)+" ");
+					continue;
+				}
+				
+			}
+			if(path.get(i-1) != path.get(i)){
+				System.out.print(path.get(i)+" ");
+			}
+			
+		}
+		
+		System.out.println(" ");
+	}
 
 }

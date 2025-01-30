@@ -69,7 +69,7 @@ public class Main {
         
         logger.info("**** Computing path");
         if(path.Solve()){
-            path.printCanonicalPath();
+            path.printFactorizedPath();
         }
         else{
             logger.warn("PATH NOT COMPUTED");
