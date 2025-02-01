@@ -18,8 +18,10 @@ public class Main {
         // Define command-line options
         Options options = new Options();
         options.addOption("i", true, "takes file");
+        options.addOption("p", true, "takes path");
         CommandLineParser parser = new DefaultParser();
-
+        String givenPath = "";
+        
         //Tracks the number of lines in the maze file
         int lineCount = 0;
         ArrayList<Integer> mazeList = new ArrayList<>();
@@ -29,7 +31,9 @@ public class Main {
             CommandLine cmd = parser.parse(options, args);
 
             if (cmd.hasOption("i")) {
-
+                if(cmd.hasOption("p")){
+                    givenPath = cmd.getOptionValue("p");
+                }
                 // Get the input file path
                 String inputFile = cmd.getOptionValue("i");
 
@@ -67,14 +71,25 @@ public class Main {
         Maze maze = new Maze(mazeList, lineCount);
         MazeSolver path = new MazeSolver(maze);
         
-        logger.info("**** Computing path");
-        if(path.Solve()){
-            path.printFactorizedPath();
+        if(givenPath.equals("")){
+
+            logger.info("**** Computing path");
+            if(path.Solve()){
+                path.printFactorizedPath();
+            }
+            else{
+                logger.warn("PATH NOT COMPUTED");
+            }
+            
         }
         else{
-            logger.warn("PATH NOT COMPUTED");
+            if(path.checkPath(givenPath)){
+                System.out.println("Valid");
+            }
+            else{
+                System.out.println("Invalid");
+            }
         }
-
         logger.info("** End of MazeRunner");
     }
 

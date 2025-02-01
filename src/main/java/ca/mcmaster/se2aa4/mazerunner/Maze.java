@@ -19,7 +19,7 @@ public class Maze {
 		for(int i = 0; i < Y; i++){
 			for(int j = 0; j < X; j++){
 
-				maze[j][i] = mazeList.get(Y * i + j);
+				maze[j][i] = mazeList.get(X * i + j);
 				
 			}
 			
