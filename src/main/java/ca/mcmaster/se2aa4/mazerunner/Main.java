@@ -21,7 +21,7 @@ public class Main {
         options.addOption("p", true, "takes path");
         CommandLineParser parser = new DefaultParser();
         String givenPath = "";
-        
+
         //Tracks the number of lines in the maze file
         int lineCount = 0;
         ArrayList<Integer> mazeList = new ArrayList<>();
@@ -69,12 +69,12 @@ public class Main {
 
         // Create a Maze object and attempt to solve it
         Maze maze = new Maze(mazeList, lineCount);
-        MazeSolver path = new MazeSolver(maze);
+        MazeSolver path = new RightHandAlgorithm(maze);
         
         if(givenPath.equals("")){
 
             logger.info("**** Computing path");
-            if(path.Solve()){
+            if(path.solve()){
                 path.printFactorizedPath();
             }
             else{
