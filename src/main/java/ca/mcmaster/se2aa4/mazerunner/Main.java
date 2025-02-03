@@ -13,6 +13,7 @@ public class Main {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
+        
         logger.info("** Starting Maze Runner");
 
         // Define command-line options
@@ -84,10 +85,10 @@ public class Main {
         }
         else{
             if(path.checkPath(givenPath)){
-                System.out.println("Valid");
+                System.out.println("correct path");
             }
             else{
-                System.out.println("Invalid");
+                System.out.println("incorrect path");
             }
         }
         logger.info("** End of MazeRunner");
